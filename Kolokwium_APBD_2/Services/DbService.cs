@@ -24,7 +24,7 @@ public class DbService : IDbService
                     LastName = e.Customer.LastName,
                     DateOfBirth = e.Customer.BirthDate
                 },
-                Driver = new DriverDto()
+                Driver = new DriverDto
                 {
                     FirstName = e.Driver.FirstName,
                     LastName = e.Driver.LastName,
@@ -57,7 +57,7 @@ public class DbService : IDbService
             Driver = _db.Drivers
                 .Where(e => e.LicenceNumber == dto.LicenceNumber)
                 .Select(e => e)
-                .FirstOrDefault()!,
+                .FirstOrDefault()!
         };
         await _db.AddAsync(item);
         await _db.SaveChangesAsync();

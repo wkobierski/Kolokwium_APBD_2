@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kolokwium_APBD_2.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 public class DeliveryController : ControllerBase
 {
     private readonly IDbService _db;
