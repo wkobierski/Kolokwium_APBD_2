@@ -11,27 +11,31 @@ public class DbService : IDbService
     private readonly AppDbContext _db;
     public DbService(AppDbContext db) { _db = db; }
 
-    public async Task<SampleEntityWithDetailsDto> GetByIdAsync(int id)
+    public async Task<GetDeliveryDto> GetByIdAsync(int id)
     {
-        var item = await _db.SampleEntities
-            .Where(e => e.Id == id)
-            .Select(e => new SampleEntityWithDetailsDto
+        var item = await _db.Deliveries
+            .Where(e => e.DeliveryId == id)
+            .Select(e => new GetDeliveryDto
             {
-                Id = e.Id,
-                Name = e.Name,
-                // TODO: podmień RelatedItems na właściwość nawigacyjną ze swojej encji
-                // np. jeśli PC ma PCComponents: e.PCComponents.Select(...)
-                RelatedItems = e.RelatedItems.Select(r => new RelatedItemDto
+                Date = e.Date,
+                Customer = new CustomerDto
                 {
-                    Id = r.Id,
-                    Name = r.Name,
-                    // TODO: jeśli jest kolejny poziom zagnieżdżenia (np. producent komponentu):
-                    NestedItem = new NestedRelatedItemDto
-                    {
-                        Id = r.NestedItem.Id,
-                        Name = r.NestedItem.Name
-                    }
-                })
+                    FirstName = e.Customer.FirstName,
+                    LastName = e.Customer.LastName,
+                    DateOfBirth = e.Customer.BirthDate
+                },
+                Driver = new DriverDto()
+                {
+                    FirstName = e.Driver.FirstName,
+                    LastName = e.Driver.LastName,
+                    LicenceNumber = e.Driver.LicenceNumber
+                },
+                Products = e.ProductDeliveries.Select(r => new GetProductDto
+                {
+                    Name = r.Product.Name,
+                    Price = r.Product.Price,
+                    Amount = r.Amount
+                }).ToList()
             })
             .FirstOrDefaultAsync();
 
@@ -39,15 +43,33 @@ public class DbService : IDbService
         return item;
     }
 
-    public async Task<SampleEntityDto> AddAsync(AddSampleEntityDto dto)
+    public async Task<PostDeliveryDto> AddAsync(PostDeliveryDto dto)
     {
-        var item = new SampleEntity
+        var item = new Delivery
         {
-            Name = dto.Name
-            // TODO: dopisz pozostałe właściwości z dto
+            CustomerId = dto.CustomerId,
+            DriverId = _db.Drivers
+                .Where(e => e.LicenceNumber == dto.LicenceNumber)
+                .Select(e => e.DriverId)
+                .FirstOrDefault(),
+            Date = DateTime.Now,
+            Customer = _db.Customers.Find(dto.CustomerId)!,
+            Driver = _db.Drivers
+                .Where(e => e.LicenceNumber == dto.LicenceNumber)
+                .Select(e => e)
+                .FirstOrDefault()!,
         };
         await _db.AddAsync(item);
         await _db.SaveChangesAsync();
-        return new SampleEntityDto { Id = item.Id, Name = item.Name };
+        return new PostDeliveryDto
+        {
+            CustomerId = item.CustomerId, 
+            LicenceNumber = item.Driver.LicenceNumber,
+            Products = item.ProductDeliveries.Select(e => new PostProductDto
+            {
+                Name = e.Product.Name,
+                Amount = e.Amount
+            })
+        };
     }
 }

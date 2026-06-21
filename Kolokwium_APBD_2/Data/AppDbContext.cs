@@ -7,8 +7,11 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions options) : base(options) { }
 
-    // TODO: Dodaj DbSet dla każdej encji z zadania
-    public DbSet<SampleEntity> SampleEntities { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Driver> Drivers { get; set; }
+    public DbSet<Delivery> Deliveries { get; set; }
+    public DbSet<ProductDelivery> ProductDeliveries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

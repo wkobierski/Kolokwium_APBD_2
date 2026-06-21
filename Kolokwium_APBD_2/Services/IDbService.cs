@@ -4,6 +4,6 @@ namespace Kolokwium_APBD_2.Services;
 
 public interface IDbService
 {
-    Task<SampleEntityWithDetailsDto> GetByIdAsync(int id);                     // GET szczegóły z relacjami
-    Task<SampleEntityDto> AddAsync(AddSampleEntityDto dto);                    // POST
+    Task<GetDeliveryDto> GetByIdAsync(int id);
+    Task<PostDeliveryDto> AddAsync(PostDeliveryDto dto);
 }
