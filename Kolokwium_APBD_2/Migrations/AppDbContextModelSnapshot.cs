@@ -44,21 +44,21 @@ namespace Kolokwium_APBD_2.Migrations
                         new
                         {
                             CustomerId = 1,
-                            BirthDate = new DateTime(2026, 6, 21, 19, 44, 1, 945, DateTimeKind.Local).AddTicks(8070),
+                            BirthDate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Ania",
                             LastName = "Kowalska"
                         },
                         new
                         {
                             CustomerId = 2,
-                            BirthDate = new DateTime(2026, 6, 21, 19, 44, 1, 952, DateTimeKind.Local).AddTicks(6530),
+                            BirthDate = new DateTime(2000, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Patrycja",
                             LastName = "Nowak"
                         },
                         new
                         {
                             CustomerId = 3,
-                            BirthDate = new DateTime(2026, 6, 21, 19, 44, 1, 952, DateTimeKind.Local).AddTicks(6550),
+                            BirthDate = new DateTime(2000, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Maja",
                             LastName = "Kobierska"
                         });
@@ -92,21 +92,21 @@ namespace Kolokwium_APBD_2.Migrations
                         {
                             DeliveryId = 1,
                             CustomerId = 1,
-                            Date = new DateTime(2026, 6, 21, 19, 44, 1, 955, DateTimeKind.Local).AddTicks(4180),
+                            Date = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 1
                         },
                         new
                         {
                             DeliveryId = 2,
                             CustomerId = 2,
-                            Date = new DateTime(2026, 6, 21, 19, 44, 1, 955, DateTimeKind.Local).AddTicks(4420),
+                            Date = new DateTime(2000, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 2
                         },
                         new
                         {
                             DeliveryId = 3,
                             CustomerId = 3,
-                            Date = new DateTime(2026, 6, 21, 19, 44, 1, 955, DateTimeKind.Local).AddTicks(4430),
+                            Date = new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 3
                         });
                 });
