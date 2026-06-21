@@ -24,9 +24,9 @@ public class DeliveryConfiguration : IEntityTypeConfiguration<Delivery>
 
         builder.HasData(new List<Delivery>
         {
-            new() { DeliveryId = 1, CustomerId = 1, DriverId = 1, Date = DateTime.Now },
-            new() { DeliveryId = 2, CustomerId = 2, DriverId = 2, Date = DateTime.Now },
-            new() { DeliveryId = 3, CustomerId = 3, DriverId = 3, Date = DateTime.Now }
+            new() { DeliveryId = 1, CustomerId = 1, DriverId = 1, Date = new DateTime(2000, 01, 01) },
+            new() { DeliveryId = 2, CustomerId = 2, DriverId = 2, Date = new DateTime(2000, 01, 02) },
+            new() { DeliveryId = 3, CustomerId = 3, DriverId = 3, Date = new DateTime(2000, 01, 03) }
         });
     }
 }

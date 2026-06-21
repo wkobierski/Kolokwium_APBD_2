@@ -22,9 +22,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.HasData(new List<Customer>
         {
-            new() { CustomerId = 1, FirstName = "Ania", LastName = "Kowalska", BirthDate = DateTime.Now },
-            new() { CustomerId = 2, FirstName = "Patrycja", LastName = "Nowak", BirthDate = DateTime.Now },
-            new() { CustomerId = 3, FirstName = "Maja", LastName = "Kobierska", BirthDate = DateTime.Now }
+            new() { CustomerId = 1, FirstName = "Ania", LastName = "Kowalska", BirthDate = new DateTime(2000, 01, 01) },
+            new() { CustomerId = 2, FirstName = "Patrycja", LastName = "Nowak", BirthDate = new DateTime(2000, 02, 01) },
+            new() { CustomerId = 3, FirstName = "Maja", LastName = "Kobierska", BirthDate = new DateTime(2000, 03, 01) }
         });
     }
 }
