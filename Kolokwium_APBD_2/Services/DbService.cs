@@ -57,7 +57,12 @@ public class DbService : IDbService
             Driver = _db.Drivers
                 .Where(e => e.LicenceNumber == dto.LicenceNumber)
                 .Select(e => e)
-                .FirstOrDefault()!
+                .FirstOrDefault()!,
+            ProductDeliveries = dto.Products.Select(e => new ProductDelivery
+            {
+                ProductId = _db.Products.Where(p => p.Name == e.Name).Select(p => p.ProductId).FirstOrDefault(),
+                Amount = e.Amount
+            }).ToList()
         };
         await _db.AddAsync(item);
         await _db.SaveChangesAsync();
